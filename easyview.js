@@ -18,7 +18,27 @@ Easyview.prototype = {
 };
 
 $.fn.easyview = function(options) {
-    
+    var 
+        args = $.makeArray(arguments),
+        init = $.type(options) !== 'string';
+        
+    var list, func;
+
+    list = this.each(function(){
+        var obj = $.data(this, 'easyview');
+        if ( ! obj) {
+            options = options || {};
+            $.data(this, 'easyview', (obj = new Easyview(this, options)));
+        }
+        if ( ! init) {
+            var method = args.shift();
+            if (obj[method]) {
+                func = obj[method].apply(obj, args);
+            }
+        }
+    });
+
+    return init ? list : func;
 };
 
 }())
