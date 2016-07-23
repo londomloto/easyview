@@ -2,9 +2,21 @@
 <html>
 <head>
     <title>Easyview - Example</title>
-    
+
 </head>
 <body>
+    <div id="example">
+        <h1 data-link="{:title}"></h1>
+        <input type="text" data-link="title" placeholder="Type title">
+    </div>
 
+    <script>
+        $('#example').easyview({
+            model: {
+                title: 'Untitle'
+            }
+        });
+    </script>
+    
 </body>
 </html>
