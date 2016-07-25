@@ -63,7 +63,9 @@ onButtonClick: function(e){
     <p>Click on hero to edit</p>
     <ul>
     {^{for heroes}}
-    	<li data-link="{:name} class{merge:selected.id==id} toggle='selected'"></li>
+    	<li data-link="class{merge:selected.id==id} toggle='selected'">
+        	<a href="#" data-link="{:name}"></a>
+        </li>
     {{/for}}
     </ul>
     {^{if selected}}
@@ -97,9 +99,11 @@ $(document).ready(function(){
             ]
         },
         events: {
-        	'click li': 'onSelectHero'
+        	'click li > a': 'onSelectHero'
         },
         onSelectHero: function(e) {
+        	e.preventDefault();
+            
         	var hero = this.get($(e.currentTarget));
             this.set('selected', hero);
         }
