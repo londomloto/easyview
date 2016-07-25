@@ -1,5 +1,15 @@
 # easyview
-Easy jQuery data binding powered by jsviews
+Easy jQuery MVVM (model - view - viewmodel) plugin.
+
+## Install
+
+```javascript
+npm install jquery-easyview
+```
+
+## Options
+
+
 
 # Examples
 
