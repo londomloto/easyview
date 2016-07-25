@@ -63,7 +63,7 @@ onButtonClick: function(e){
     <p>Click on hero to edit</p>
     <ul>
     {^{for heroes}}
-    	<li data-link="class{merge:selected.id==id} toggle='selected'">
+    	<li data-link="class{merge:~root.selected && ~root.selected.id==id toggle='selected'}">
         	<a href="#" data-link="{:name}"></a>
         </li>
     {{/for}}
