@@ -1,0 +1,25 @@
+{
+  "name": "easyview",
+  "version": "1.0.0",
+  "description": "jQuery MVVM plugin",
+  "main": "easyview.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/londomloto/easyview.git"
+  },
+  "keywords": [
+    "jquery-plugin"
+  ],
+  "author": "londomloto <roso.sasongko@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/londomloto/easyview/issues"
+  },
+  "homepage": "https://github.com/londomloto/easyview#readme"
+}

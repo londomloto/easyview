@@ -7,17 +7,41 @@
 <body>
     <div id="example">
         <h1 data-link="{:title}"></h1>
-        <input type="text" data-link="title" placeholder="Type title">
+        <ul>
+            {^{for heroes}}
+            <li><a href="#" data-link="{:name}"></a></li>
+            {{/for}}
+        </ul>
+        {^{if selected}}
+        <h2>Hero Detail</h2>
+        <input type="text" data-link="selected^name trigger=true">
+        {{/if}}
     </div>
 
-    <script src="../../../jquery/jquery.min.js"></script>
-    <script src="../../../jsviews/jsviews.min.js"></script>
+    <script src="../../../jquery/2.1.4/jquery.min.js"></script>
+    <script src="../../../jsviews/0.9.75/jsviews.min.js"></script>
     <script src="../easyview.js"></script>
 
     <script>
         $('#example').easyview({
             model: {
-                title: 'Untitle'
+                title: 'My Heroes',
+                heroes: [
+                    {id: 1, name: 'Windstorm'},
+                    {id: 2, name: 'Angular'},
+                    {id: 3, name: 'Google'}
+                ],
+                selected: null
+            },
+            events: {
+                'click li a': 'onSelectHero'
+            },
+            onSelectHero: function(e) {
+                e.preventDefault();
+                var node = $(e.currentTarget),
+                    hero = this.get(node);
+
+                this.set('selected', hero);
             }
         });
     </script>
