@@ -1,5 +1,5 @@
 # easyview
-Easy jQuery MVVM (model - view - viewmodel) plugin.
+Easy jQuery MVVM (model - view - viewmodel) plugin based on jsviews. For markups documentation, see https://www.jsviews.com.
 
 ## Install
 
@@ -7,33 +7,129 @@ Easy jQuery MVVM (model - view - viewmodel) plugin.
 npm install jquery-easyview
 ```
 
+## Demo
+
+[Live Demo (plunker)](https://plnkr.co/edit/Sakdl72AGpc1DNxkQafx?p=preview)
+
 ## Options
 
+#### model
 
+Type: `Object` Default: `{}`
+Data represents real state content.
 
-# Examples
+```javascript
+model: {
+	title: 'My Heroes',
+    selected: null,
+    heroes: [
+    	{id: 1, name: 'Windstorm'},
+        {id: 2, name: 'Bombasto'}
+    ]
+}
+```
 
-- Simple usages
-  
-  ```html
-  <div id="example">
-    <h1 data-link="{:name}"></h1>
-    <input type="text" data-link="name">
-    <button name="submit">Submit</button>
-  </div>
-  ```
-  
-  ```javascript
-  $('#example').easyview({
-    model: {
-        name: 'Londomloto'
-    },
-    events: {
-        'click button[name=submit]': function(e) {
-            alert(this.get('name'));
+#### events
+Type: `Object` Default: `{}`
+DOM Events binding specification.
+
+```javascript
+events: {
+	'click button': 'onButtonClick',
+    'keypress input': function(e) {
+    	if (e.keyCode === 13) {
+        	// ...
         }
     }
-  });  
-  ```
+},
 
-- Advance Usages
+onButtonClick: function(e){
+	e.preventDefault();
+    // ...
+}
+```
+
+## Example
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<!-- part of view -->
+<div id="example">
+	<h1>My Heroes</h1>
+    <p>Click on hero to edit</p>
+    <ul>
+    {^{for heroes}}
+    	<li data-link="{:name} class{merge:selected.id==id} toggle='selected'"></li>
+    {{/for}}
+    </ul>
+    {^{if selected}}
+    <h2>My Hero Detail</h2>
+    Edit hero: <input type="text" data-link="selected^name trigger=true">
+    {{/if}}
+</div>
+
+<!-- include libraries -->
+<script src="PATH_TO_JQUERY"></script>
+<script src="jquery-easyview.js"></script>
+
+<!-- your script -->
+<script src="script.js"></script>
+
+</body>
+</html>
+```
+
+```javascript
+// file: script.js
+
+$(document).ready(function(){
+
+	$('#example').easyview({
+    	model: {
+        	selected: null,
+            heroes: [
+            	{id: 1, name: 'Windstorm'},
+                {id: 2, name: 'Bombasto'}
+            ]
+        },
+        events: {
+        	'click li': 'onSelectHero'
+        },
+        onSelectHero: function(e) {
+        	var hero = this.get($(e.currentTarget));
+            this.set('selected', hero);
+        }
+    });
+
+});
+
+```
+
+## Methods
+
+#### set()
+Set model property value. 
+
+```javascript
+// using string as key
+$('#example').easyview('set', 'title', 'Untitled');
+$('#example').easyview('set', 'selected.name', 'Magneta');
+
+// using jQuery object
+$('#example').easyview('set', $('li.selected'), 'name', 'Magma');
+```
+
+#### get()
+Get model property value
+
+```javascript
+// using string as key
+var hero = $('#example').easyview('get', 'selected');
+
+// using jQuery object
+var hero = $('#example').easyview('get', $('li.selected'));
+```

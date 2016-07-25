@@ -1,8 +1,8 @@
 {
-  "name": "easyview",
+  "name": "jquery-easyview",
   "version": "1.0.0",
   "description": "jQuery MVVM plugin",
-  "main": "easyview.js",
+  "main": "jquery-easyview.js",
   "directories": {
     "example": "example"
   },
@@ -14,7 +14,10 @@
     "url": "git+https://github.com/londomloto/easyview.git"
   },
   "keywords": [
-    "jquery-plugin"
+    "jquery-plugin",
+    "mvvm",
+    "view",
+    "binding"
   ],
   "author": "londomloto <roso.sasongko@gmail.com>",
   "license": "ISC",
