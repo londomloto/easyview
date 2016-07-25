@@ -1,5 +1,5 @@
 # easyview
-Easy jQuery MVVM (model - view - viewmodel) plugin based on jsviews. For detail markup  documentation, see https://www.jsviews.com.
+Easy jquery mvvm (model - view - viewmodel) plugin based on jsviews. For detail markup  documentation, see https://www.jsviews.com.
 
 ## Install
 
