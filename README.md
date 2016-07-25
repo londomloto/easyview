@@ -49,6 +49,31 @@ onButtonClick: function(e){
 }
 ```
 
+## Methods
+
+#### set()
+Set model property value. 
+
+```javascript
+// using string as key
+$('#example').easyview('set', 'title', 'Untitled');
+$('#example').easyview('set', 'selected.name', 'Magneta');
+
+// using jQuery object
+$('#example').easyview('set', $('li.selected'), 'name', 'Magma');
+```
+
+#### get()
+Get model property value
+
+```javascript
+// using string as key
+var hero = $('#example').easyview('get', 'selected');
+
+// using jQuery object
+var hero = $('#example').easyview('get', $('li.selected'));
+```
+
 ## Example
 
 ```html
@@ -113,27 +138,25 @@ $(document).ready(function(){
 
 ```
 
-## Methods
-
-#### set()
-Set model property value. 
+Example asynchronous loading or setting property value:
 
 ```javascript
-// using string as key
-$('#example').easyview('set', 'title', 'Untitled');
-$('#example').easyview('set', 'selected.name', 'Magneta');
+// jQuery ajax
+$.ajax({
+	url: 'heroes.php',
+    dataType: 'json'
+}).done(function(heroes){
+	$('#example').easeview('set', 'heroes', heroes);
+});
 
-// using jQuery object
-$('#example').easyview('set', $('li.selected'), 'name', 'Magma');
-```
+// promise
+funtion getHeroes() {
+	return $.ajax({url: 'heroes'}).promise();
+}
 
-#### get()
-Get model property value
+getHeroes().then(function(heroes){
+	$('#example').easeview('set', 'heroes', heroes);
+});
 
-```javascript
-// using string as key
-var hero = $('#example').easyview('get', 'selected');
 
-// using jQuery object
-var hero = $('#example').easyview('get', $('li.selected'));
 ```
